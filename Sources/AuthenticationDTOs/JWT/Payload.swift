@@ -10,7 +10,7 @@ import UserDTOs
 import Foundation
 
 public struct Payload: Sendable, Codable, JWTPayload {
-    // User-releated stuff
+	// User-releated stuff
 	public var userID: UserDTO.UserId
     public var fullName: String
     public var email: String
@@ -22,7 +22,7 @@ public struct Payload: Sendable, Codable, JWTPayload {
     // JWT stuff
     public var exp: ExpirationClaim
     
-	public func verify(using signer: JWTSigner) throws {
+	public func verify(using signer: some JWTAlgorithm) async throws { //
         try self.exp.verifyNotExpired()
     }
     
